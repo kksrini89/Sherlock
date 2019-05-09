@@ -1,0 +1,27 @@
+{
+  "name": "node_ts",
+  "version": "1.0.0",
+  "description": "To use typescript with Node/Express",
+  "main": "index.js",
+  "scripts": {
+    "build-ts": "tsc",
+    "serve": "concurrently \"npm run build-ts\" \"nodemon ./dist/server.js\""
+  },
+  "keywords": [],
+  "author": "Srinivasan K K",
+  "license": "ISC",
+  "dependencies": {
+    "@types/cors": "^2.8.5",
+    "@types/express": "^4.16.1",
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "typescript": "^3.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^11.13.0",
+    "nodemon": "^1.18.10",
+    "ts-node": "^8.0.3"
+  }
+}

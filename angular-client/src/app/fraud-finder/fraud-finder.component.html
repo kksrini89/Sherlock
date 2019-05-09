@@ -1,0 +1,64 @@
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel [expanded]="true">
+    <mat-form-field>
+      <input matInput placeholder="Transaction Id" [(ngModel)]="transactionId" />
+      <mat-error *ngIf="transactionId.toString() !== '' && !transactionIdRegex.test(transactionId)">
+        Transaction Id is not valid
+      </mat-error>
+    </mat-form-field>
+    <br />
+    <mat-form-field>
+      <input
+        matInput
+        type="number"
+        max="1"
+        [(ngModel)]="confidenceLevel"
+        placeholder="Confidence (default 1)"
+      />
+    </mat-form-field>
+
+    <mat-action-row>
+      <button mat-button color="primary" (click)="search()">Next</button>
+    </mat-action-row>
+
+    <table mat-table [dataSource]="filteredTransactions">
+      <ng-container matColumnDef="Transaction Id">
+        <th mat-header-cell *matHeaderCellDef>Transaction Id.</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Connection Info">
+        <th mat-header-cell *matHeaderCellDef>Connection Info</th>
+        <td mat-cell *matCellDef="let element">{{ element.connectionInfo.type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Confidence Level">
+        <th mat-header-cell *matHeaderCellDef>Confidence Level</th>
+        <td mat-cell *matCellDef="let element">{{ element.connectionInfo.confidence }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Phone">
+        <th mat-header-cell *matHeaderCellDef>Phone</th>
+        <td mat-cell *matCellDef="let element">{{ element.phone }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Age">
+        <th mat-header-cell *matHeaderCellDef>Age</th>
+        <td mat-cell *matCellDef="let element">{{ element.age }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </mat-expansion-panel>
+</mat-accordion>
