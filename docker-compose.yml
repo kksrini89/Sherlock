@@ -1,10 +1,17 @@
-version '3'
+version: '3'
+
 services:
-  angular-client:
-    build: angular-client
+  angular:
+    build:
+      context: ./angular-client
+      dockerfile: Dockerfile
     ports:
-     - 4200:4200
-  express-server:
-    build: express-server
+     - "4200:4200"
+    volumes:
+      - ./angular-client:/app
+  express:
+    build:
+      context: ./express-server
+      dockerfile: Dockerfile
     ports:
-     - 5000:5000
+     - "3000:3000"

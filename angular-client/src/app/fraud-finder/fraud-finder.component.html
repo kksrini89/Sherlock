@@ -3,7 +3,7 @@
     <mat-form-field>
       <input matInput placeholder="Transaction Id" [(ngModel)]="transactionId" />
       <mat-error *ngIf="transactionId.toString() !== '' && !transactionIdRegex.test(transactionId)">
-        Transaction Id is not valid
+        Transaction Id
       </mat-error>
     </mat-form-field>
     <br />

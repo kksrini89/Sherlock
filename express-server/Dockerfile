@@ -1,18 +1,18 @@
-FROM node
+FROM node:6
 
 # Create app directory
-RUN mkdir -p /app
-WORKDIR /app
+RUN mkdir -p /user/src/app
+WORKDIR /user/src/app
 
 # Install app dependencies
-COPY package.json /app
-COPY package-lock.json /app
+COPY package.json /user/src/app/
+
 RUN npm install
 
 # Bundle app source
-COPY . /app
+COPY . /user/src/app/
 RUN npm run build-ts
 
-EXPOSE 9005
+EXPOSE 3000
 
-CMD [ "node", "./dist/server.js" ]
+CMD [ "npm", "start" ]

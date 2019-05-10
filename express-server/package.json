@@ -4,8 +4,8 @@
   "description": "To use typescript with Node/Express",
   "main": "index.js",
   "scripts": {
-    "build-ts": "tsc",
-    "serve": "concurrently \"npm run build-ts\" \"nodemon ./dist/server.js\""
+    "start": "nodemon ./dist/server.js",
+    "build-ts": "tsc"
   },
   "keywords": [],
   "author": "Srinivasan K K",
