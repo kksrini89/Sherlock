@@ -7,7 +7,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TransactionData {
-  public api_endpoint: String = `http://localhost:4000/api`;
+  public api_endpoint: String = `http://localhost:3000/api`;
   transactions = [
     {
       id: '5c8657845d3dc63c6d5bb643',
@@ -75,7 +75,7 @@ export class TransactionData {
     try {
       const params = new HttpParams();
       params.set('id', id);
-      return this.http.get(`${this.api_endpoint}/transaction`, { params });
+      return this.http.get(`${this.api_endpoint}/transaction/${id}`);
     } catch (error) {
       throw error;
     }

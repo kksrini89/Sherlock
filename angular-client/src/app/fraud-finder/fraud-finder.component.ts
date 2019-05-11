@@ -31,6 +31,9 @@ export class FraudFinderComponent implements OnInit, OnDestroy {
 
   constructor(public transactionData: TransactionData) {}
 
+  /**
+   * Life cycle hooks - To get initial set of transactions from an API
+   */
   ngOnInit() {
     this.transactionSubscription = this.transactionData.getTransactions().subscribe(
       data => {
@@ -41,6 +44,10 @@ export class FraudFinderComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   * To search transaction by either confidence level or trasanction id
+   * @returns {void}
+   */
   search() {
     try {
       if (this.transactionId === '') {
@@ -52,10 +59,13 @@ export class FraudFinderComponent implements OnInit, OnDestroy {
             this.transactionId = '';
           });
       }
+
+      // Validate transaction id
       if (
         this.transactionId !== '' &&
         this.transactionIdRegex.test(this.transactionId.toString())
       ) {
+        // Search By Transaction Id
         this.transactionByIdSubscription = this.transactionData
           .searchTransactionById(this.transactionId)
           .subscribe(data => {
@@ -63,55 +73,11 @@ export class FraudFinderComponent implements OnInit, OnDestroy {
           });
       } else {
         throw Error('Transaction Id is not valid!');
-      }
-      // if (this.transactionId === '' && this.confidenceLevel === 1) {
-      //   this.transactionSubscription = this.transactionData.getTransactions().subscribe(data => {
-      //     this.filteredTransactions = new MatTableDataSource(data['result']);
-      //   });
-      // }
-      // this.transactionData.searchTransactionById(this.transactionId).subscribe(data => {
-      //   console.log(data);
-      //   const transactionItem: RootObject = data['result'];
-      //   const transactionInput: RootObject = transactionItem;
-      //   const rootIndexItem: Children = Object.assign({}, transactionInput, { childrens: null });
-      //   // tslint:disable-next-line:prefer-const
-      //   let results: Array<Children> = [rootIndexItem];
-      //   for (const iterator of transactionInput.childrens) {
-      //     if (iterator['childrens'] !== undefined) {
-      //       if (iterator['childrens'].length > 0) {
-      //         // tslint:disable-next-line:prefer-const
-      //         let flattenedTransactions = [];
-      //         this.flattenTransactions(flattenedTransactions, iterator['childrens']);
-      //         results.push(...flattenedTransactions);
-      //       } else {
-      //         results.push(iterator);
-      //       }
-      //     }
-      //   }
-      //   this.filteredTransactions = results;
-      // });
-      // const flattenedTransactions = flattenDeep(transactionItem.childrens);
-      // const result = [rootIndexItem, ...flattenedTransactions];
+      }      
     } catch (error) {
       throw error;
     }
   }
-
-  // private flattenTransactions(transactions, item: Array<Children>): void {
-  //   try {
-  //     if (item !== null && Array.isArray(item) && item.length > 0) {
-  //       for (const i of item) {
-  //         if (typeof i['childrens'] !== undefined) {
-  //           i['childrens'].length > 0
-  //             ? this.flattenTransactions(transactions, i['childrens'])
-  //             : transactions.push(i);
-  //         }
-  //       }
-  //     }
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
 
   ngOnDestroy() {
     if (this.transactionSubscription !== null) {
