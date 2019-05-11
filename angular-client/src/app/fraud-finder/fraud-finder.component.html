@@ -29,7 +29,12 @@
 
       <ng-container matColumnDef="Connection Info">
         <th mat-header-cell *matHeaderCellDef>Connection Info</th>
-        <td mat-cell *matCellDef="let element">{{ element.connectionInfo.type }}</td>
+        <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.connectionInfo.type === 'sameGeoInfo';else mail_content" >
+                <i class="fa fa-globe" matTooltip="SameGeoInfo"></i>
+            </div>            
+            <ng-template #mail_content> <i class="fa fa-envelope" matTooltip="SameEmail"></i> </ng-template>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="Confidence Level">

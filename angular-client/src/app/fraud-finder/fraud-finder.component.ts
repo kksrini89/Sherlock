@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
+import { Subscription } from 'rxjs';
 
 import { TransactionData } from '../services/transactions';
-import { RootObject, Children } from '../models/transaction';
 
 @Component({
   selector: 'app-fraud-finder',
@@ -14,7 +13,6 @@ export class FraudFinderComponent implements OnInit, OnDestroy {
   transactionId: String = '';
   confidenceLevel: Number = 1;
   filteredTransactions = null;
-  isIdValid: Boolean = false;
   transactionIdRegex = /^[0-9a-fA-F]+$/;
 
   displayedColumns: string[] = [
@@ -79,6 +77,9 @@ export class FraudFinderComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Life cycle hook - to unsubscribe observables
+   */
   ngOnDestroy() {
     if (this.transactionSubscription !== null) {
       this.transactionSubscription.unsubscribe();
